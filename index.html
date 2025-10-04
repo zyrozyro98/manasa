@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الطلاب الإلكترونية</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light-color);
+        }
+        
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .dashboard {
+            padding: 2rem 0;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .chat-container {
+            display: flex;
+            height: 70vh;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+            background-color: #e9ecef;
+            color: #333;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+        
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .image-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .admin-panel {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .alert {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-3 {
+            margin-top: 1rem;
+        }
+        
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">منصة الطلاب</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="homeLink">الرئيسية</a></li>
+                    <li><a href="#" id="loginLink">تسجيل الدخول</a></li>
+                    <li><a href="#" id="registerLink">التسجيل</a></li>
+                    <li><a href="#" id="dashboardLink" class="hidden">لوحة التحكم</a></li>
+                    <li><a href="#" id="chatLink" class="hidden">الدردشة</a></li>
+                    <li><a href="#" id="imagesLink" class="hidden">الصور</a></li>
+                    <li><a href="#" id="adminLink" class="hidden">لوحة المدير</a></li>
+                    <li><a href="#" id="logoutLink" class="hidden">تسجيل الخروج</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="homePage" class="container">
+        <div class="form-container">
+            <h1 class="form-title">مرحباً بكم في منصة الطلاب</h1>
+            <p class="text-center">منصة متكاملة للطلاب لتسجيل البيانات والتفاعل مع الإدارة</p>
+            <div class="text-center mt-3">
+                <button class="btn" id="homeLoginBtn">تسجيل الدخول</button>
+                <button class="btn" id="homeRegisterBtn">إنشاء حساب جديد</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="loginPage" class="container hidden">
+        <div class="form-container">
+            <h2 class="form-title">تسجيل الدخول</h2>
+            <div id="loginAlert"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginPhone">رقم الهاتف</label>
+                    <input type="tel" id="loginPhone" class="form-control" placeholder="5XXXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">كلمة المرور</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-block">تسجيل الدخول</button>
+            </form>
+            <p class="text-center mt-3">ليس لديك حساب؟ <a href="#" id="toRegister">سجل الآن</a></p>
+        </div>
+    </section>
+
+    <section id="registerPage" class="container hidden">
+        <div class="form-container">
+            <h2 class="form-title">إنشاء حساب جديد</h2>
+            <div id="registerAlert"></div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف السعودي</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="5XXXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="university">الجامعة</label>
+                    <select id="university" class="form-control" required>
+                        <option value="">اختر الجامعة</option>
+                        <option value="جامعة الملك سعود">جامعة الملك سعود</option>
+                        <option value="جامعة الملك عبدالعزيز">جامعة الملك عبدالعزيز</option>
+                        <option value="جامعة الإمام محمد بن سعود">جامعة الإمام محمد بن سعود</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="major">التخصص</label>
+                    <select id="major" class="form-control" required>
+                        <option value="">اختر التخصص</option>
+                        <option value="هندسة الحاسب">هندسة الحاسب</option>
+                        <option value="علوم الحاسب">علوم الحاسب</option>
+                        <option value="الطب">الطب</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="batch">الدفعة</label>
+                    <select id="batch" class="form-control" required>
+                        <option value="">اختر الدفعة</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-block">إنشاء الحساب</button>
+            </form>
+            <p class="text-center mt-3">لديك حساب بالفعل؟ <a href="#" id="toLogin">سجل الدخول</a></p>
+        </div>
+    </section>
+
+    <section id="dashboardPage" class="container hidden">
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h1>لوحة التحكم</h1>
+                <p>مرحباً بك، <span id="userName"></span></p>
+            </div>
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>معلومات الطالب</h3>
+                    <p><strong>الجامعة:</strong> <span id="userUniversity"></span></p>
+                    <p><strong>التخصص:</strong> <span id="userMajor"></span></p>
+                    <p><strong>الدفعة:</strong> <span id="userBatch"></span></p>
+                </div>
+                <div class="card">
+                    <h3>الدردشة</h3>
+                    <p>تواصل مع مدير المنصة</p>
+                    <button class="btn mt-3" id="goToChat">فتح الدردشة</button>
+                </div>
+                <div class="card">
+                    <h3>الصور</h3>
+                    <p>عرض الصور المرسلة لك</p>
+                    <button class="btn mt-3" id="goToImages">عرض الصور</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chatPage" class="container hidden">
+        <div class="form-container">
+            <h2 class="form-title">نظام الدردشة</h2>
+            <div class="chat-container">
+                <div class="chat-main">
+                    <div class="chat-header">
+                        <h3>محادثة مع المدير</h3>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا...">
+                        <button class="btn" id="sendMessage">إرسال</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="imagesPage" class="container hidden">
+        <div class="form-container">
+            <h2 class="form-title">الصور المرسلة لك</h2>
+            <div class="images-container" id="imagesContainer"></div>
+        </div>
+    </section>
+
+    <section id="adminPage" class="container hidden">
+        <div class="form-container">
+            <h2 class="form-title">لوحة المدير</h2>
+            <div class="admin-panel">
+                <h3>رفع مجلد الصور</h3>
+                <div class="upload-area" id="uploadArea">
+                    <p>اسحب وأفلت مجلد الصور هنا أو انقر للاختيار</p>
+                    <input type="file" id="folderInput" webkitdirectory multiple style="display: none;">
+                </div>
+                <div id="uploadProgress" class="hidden">
+                    <p>جاري رفع الصور...</p>
+                    <div id="progressBar" style="width: 100%; height: 20px; background: #f0f0f0; border-radius: 10px; overflow: hidden;">
+                        <div id="progressFill" style="height: 100%; background: #3498db; width: 0%; transition: width 0.3s;"></div>
+                    </div>
+                    <p id="progressText">0%</p>
+                </div>
+                <button id="sendAllImages" class="btn btn-success btn-block mt-3" disabled>إرسال جميع الصور إلى المستخدمين</button>
+                <div id="adminAlert" class="mt-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const API_BASE = 'https://your-app.onrender.com/api'; // سيتم تحديث هذا بعد النشر
+        
+        let currentUser = null;
+        let uploadedImages = [];
+
+        // عناصر DOM
+        const elements = {
+            homePage: document.getElementById('homePage'),
+            loginPage: document.getElementById('loginPage'),
+            registerPage: document.getElementById('registerPage'),
+            dashboardPage: document.getElementById('dashboardPage'),
+            chatPage: document.getElementById('chatPage'),
+            imagesPage: document.getElementById('imagesPage'),
+            adminPage: document.getElementById('adminPage')
+        };
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            setupEventListeners();
+        });
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            const userData = localStorage.getItem('user');
+            
+            if (token && userData) {
+                currentUser = JSON.parse(userData);
+                if (currentUser.role === 'admin') {
+                    showAdminPanel();
+                } else {
+                    showDashboard();
+                }
+            } else {
+                showHome();
+            }
+        }
+
+        function setupEventListeners() {
+            // روابط التنقل
+            document.getElementById('homeLink').addEventListener('click', showHome);
+            document.getElementById('loginLink').addEventListener('click', showLogin);
+            document.getElementById('registerLink').addEventListener('click', showRegister);
+            document.getElementById('dashboardLink').addEventListener('click', showDashboard);
+            document.getElementById('chatLink').addEventListener('click', showChat);
+            document.getElementById('imagesLink').addEventListener('click', showImages);
+            document.getElementById('adminLink').addEventListener('click', showAdminPanel);
+            document.getElementById('logoutLink').addEventListener('click', logout);
+
+            // أزرار الصفحة الرئيسية
+            document.getElementById('homeLoginBtn').addEventListener('click', showLogin);
+            document.getElementById('homeRegisterBtn').addEventListener('click', showRegister);
+
+            // نماذج
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+
+            // روابط التنقل بين النماذج
+            document.getElementById('toLogin').addEventListener('click', showLogin);
+            document.getElementById('toRegister').addEventListener('click', showRegister);
+
+            // أزرار لوحة التحكم
+            document.getElementById('goToChat').addEventListener('click', showChat);
+            document.getElementById('goToImages').addEventListener('click', showImages);
+
+            // نظام الدردشة
+            document.getElementById('sendMessage').addEventListener('click', sendMessage);
+            document.getElementById('messageInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+
+            // نظام رفع الملفات للمدير
+            document.getElementById('uploadArea').addEventListener('click', () => {
+                document.getElementById('folderInput').click();
+            });
+            document.getElementById('folderInput').addEventListener('change', handleFolderUpload);
+            document.getElementById('sendAllImages').addEventListener('click', sendAllImagesToUsers);
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const phone = document.getElementById('loginPhone').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    currentUser = data.user;
+                    
+                    if (currentUser.role === 'admin') {
+                        showAdminPanel();
+                    } else {
+                        showDashboard();
+                    }
+                } else {
+                    showAlert('loginAlert', data.message, 'error');
+                }
+            } catch (error) {
+                showAlert('loginAlert', 'خطأ في الاتصال بالخادم', 'error');
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                university: document.getElementById('university').value,
+                major: document.getElementById('major').value,
+                batch: document.getElementById('batch').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('registerAlert', 'تم إنشاء الحساب بنجاح', 'success');
+                    setTimeout(() => showLogin(), 2000);
+                } else {
+                    showAlert('registerAlert', data.message, 'error');
+                }
+            } catch (error) {
+                showAlert('registerAlert', 'خطأ في الاتصال بالخادم', 'error');
+            }
+        }
+
+        function handleFolderUpload(e) {
+            const files = Array.from(e.target.files);
+            uploadedImages = files.filter(file => file.type.startsWith('image/'));
+            
+            if (uploadedImages.length > 0) {
+                document.getElementById('sendAllImages').disabled = false;
+                showAlert('adminAlert', `تم اختيار ${uploadedImages.length} صورة`, 'success');
+            } else {
+                showAlert('adminAlert', 'لم يتم اختيار أي صور', 'error');
+            }
+        }
+
+        async function sendAllImagesToUsers() {
+            if (uploadedImages.length === 0) return;
+
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const uploadProgress = document.getElementById('uploadProgress');
+            
+            uploadProgress.classList.remove('hidden');
+            
+            try {
+                for (let i = 0; i < uploadedImages.length; i++) {
+                    const file = uploadedImages[i];
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    formData.append('phone', file.name.replace(/\.[^/.]+$/, "")); // اسم الملف بدون امتداد
+
+                    const response = await fetch(`${API_BASE}/admin/send-image`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        },
+                        body: formData
+                    });
+
+                    const progress = ((i + 1) / uploadedImages.length) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `${Math.round(progress)}%`;
+
+                    if (!response.ok) {
+                        throw new Error(`فشل في إرسال الصورة ${file.name}`);
+                    }
+                }
+                
+                showAlert('adminAlert', 'تم إرسال جميع الصور بنجاح', 'success');
+                document.getElementById('sendAllImages').disabled = true;
+                
+            } catch (error) {
+                showAlert('adminAlert', error.message, 'error');
+            }
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const text = messageInput.value.trim();
+            
+            if (!text) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/chat/send`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({ text })
+                });
+
+                if (response.ok) {
+                    messageInput.value = '';
+                    loadMessages();
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+            }
+        }
+
+        async function loadMessages() {
+            try {
+                const response = await fetch(`${API_BASE}/chat/messages`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const messages = await response.json();
+                    displayMessages(messages);
+                }
+            } catch (error) {
+                console.error('Error loading messages:', error);
+            }
+        }
+
+        async function loadImages() {
+            try {
+                const response = await fetch(`${API_BASE}/images`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                if (response.ok) {
+                    const images = await response.json();
+                    displayImages(images);
+                }
+            } catch (error) {
+                console.error('Error loading images:', error);
+            }
+        }
+
+        function displayMessages(messages) {
+            const container = document.getElementById('chatMessages');
+            container.innerHTML = '';
+
+            messages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(msg.senderId === currentUser._id ? 'sent' : 'received');
+                
+                messageDiv.innerHTML = `
+                    <div>${msg.text}</div>
+                    <div class="message-time">${new Date(msg.timestamp).toLocaleTimeString('ar-SA')}</div>
+                `;
+                
+                container.appendChild(messageDiv);
+            });
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function displayImages(images) {
+            const container = document.getElementById('imagesContainer');
+            container.innerHTML = '';
+
+            if (images.length === 0) {
+                container.innerHTML = '<p class="text-center">لا توجد صور مرسلة لك بعد</p>';
+                return;
+            }
+
+            images.forEach(img => {
+                const imageCard = document.createElement('div');
+                imageCard.classList.add('image-card');
+                imageCard.innerHTML = `
+                    <img src="${img.url}" alt="${img.imageName}">
+                    <div class="image-info">
+                        <p><strong>تاريخ الإرسال:</strong> ${new Date(img.sentAt).toLocaleDateString('ar-SA')}</p>
+                    </div>
+                `;
+                container.appendChild(imageCard);
+            });
+        }
+
+        function showAlert(containerId, message, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+        }
+
+        function showPage(page) {
+            Object.values(elements).forEach(el => el.classList.add('hidden'));
+            page.classList.remove('hidden');
+        }
+
+        function updateNavigation(isLoggedIn, isAdmin = false) {
+            document.getElementById('homeLink').classList.remove('hidden');
+            document.getElementById('loginLink').classList.toggle('hidden', isLoggedIn);
+            document.getElementById('registerLink').classList.toggle('hidden', isLoggedIn);
+            document.getElementById('dashboardLink').classList.toggle('hidden', !isLoggedIn || isAdmin);
+            document.getElementById('chatLink').classList.toggle('hidden', !isLoggedIn || isAdmin);
+            document.getElementById('imagesLink').classList.toggle('hidden', !isLoggedIn || isAdmin);
+            document.getElementById('adminLink').classList.toggle('hidden', !isAdmin);
+            document.getElementById('logoutLink').classList.toggle('hidden', !isLoggedIn);
+        }
+
+        function showHome() { showPage(elements.homePage); updateNavigation(false); }
+        function showLogin() { showPage(elements.loginPage); updateNavigation(false); }
+        function showRegister() { showPage(elements.registerPage); updateNavigation(false); }
+        
+        function showDashboard() {
+            showPage(elements.dashboardPage);
+            updateNavigation(true);
+            document.getElementById('userName').textContent = currentUser.fullName;
+            document.getElementById('userUniversity').textContent = currentUser.university;
+            document.getElementById('userMajor').textContent = currentUser.major;
+            document.getElementById('userBatch').textContent = currentUser.batch;
+        }
+        
+        function showChat() { 
+            showPage(elements.chatPage); 
+            updateNavigation(true);
+            loadMessages();
+        }
+        
+        function showImages() { 
+            showPage(elements.imagesPage); 
+            updateNavigation(true);
+            loadImages();
+        }
+        
+        function showAdminPanel() { 
+            showPage(elements.adminPage); 
+            updateNavigation(true, true);
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            currentUser = null;
+            showHome();
+        }
+    </script>
+</body>
+</html>
